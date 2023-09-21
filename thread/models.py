@@ -9,8 +9,8 @@ class User(models.Model):
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
 
-    user_id = models.BigAutoField(primary_key=True, verbose='Идентификатор пользователя')
-    user_name = models.CharField(max_length=30, verbose='Имя пользователя')
+    user_id = models.BigAutoField(primary_key=True, verbose_name='Идентификатор пользователя')
+    user_name = models.CharField(max_length=30, verbose_name='Имя пользователя')
 
 
 class Owner(models.Model):
@@ -21,8 +21,8 @@ class Owner(models.Model):
         verbose_name = 'Владелец'
         verbose_name_plural = 'Владельцы'
 
-    owner_id = models.BigAutoField(primary_key=True, verbose='Идентификатор владельца')
-    owner_name = models.CharField(max_length=30, verbose='Имя Владельца')
+    owner_id = models.BigAutoField(primary_key=True, verbose_name='Идентификатор владельца')
+    owner_name = models.CharField(max_length=30, verbose_name='Имя Владельца')
 
 
 class Lesson(models.Model):
@@ -33,9 +33,9 @@ class Lesson(models.Model):
         verbose_name = 'Урок'
         verbose_name_plural = 'Уроки'
 
-    lesson_id = models.BigAutoField(primary_key=True, verbose='Идентификатор урока')
-    link = models.CharField(max_length=100, verbose='Ссылка на видео')
-    length = models.TimeField(verbose='Продолжительность видео')
+    lesson_id = models.BigAutoField(primary_key=True, verbose_name='Идентификатор урока')
+    link = models.CharField(max_length=100, verbose_name='Ссылка на видео')
+    length = models.TimeField(verbose_name='Продолжительность видео')
 
 
 class Product(models.Model):
@@ -46,9 +46,9 @@ class Product(models.Model):
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
 
-    product_id = models.BigAutoField(primary_key=True, verbose='Идентификатор продукта')
-    owner_id = models.ForeignKey(Owner, on_delete=models.CASCADE, verbose='Идентификатор владельца')
-    product_name = models.CharField(max_length=30, verbose='Имя продукта')
+    product_id = models.BigAutoField(primary_key=True, verbose_name='Идентификатор продукта')
+    owner_id = models.ForeignKey(Owner, on_delete=models.CASCADE, verbose_name='Идентификатор владельца')
+    product_name = models.CharField(max_length=30, verbose_name='Имя продукта')
 
 
 class ProductCompound(models.Model):
@@ -59,8 +59,8 @@ class ProductCompound(models.Model):
         verbose_name = 'Состав продукта'
         verbose_name_plural = 'Составы продуктов'
 
-    product_id = models.ForeignKey(Product, primary_key=True, on_delete=models.CASCADE, verbose='Идентификатор продукта')
-    lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose='Идентификатор урока')
+    product_id = models.ForeignKey(Product, primary_key=True, on_delete=models.CASCADE, verbose_name='Идентификатор продукта')
+    lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='Идентификатор урока')
 
 
 class Access(models.Model):
@@ -71,8 +71,8 @@ class Access(models.Model):
         verbose_name = 'Доступ'
         verbose_name_plural = 'Права доступа'
 
-    product_id = models.ForeignKey(Product, primary_key=True, on_delete=models.CASCADE, verbose='Идентификатор продукта')
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose='Идентификатор пользователя')
+    product_id = models.ForeignKey(Product, primary_key=True, on_delete=models.CASCADE, verbose_name='Идентификатор продукта', unique=False)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Идентификатор пользователя')
 
 
 class UserProgress(models.Model):
@@ -84,8 +84,8 @@ class UserProgress(models.Model):
         verbose_name = 'Индикатор прогресса'
         verbose_name_plural = 'Индикаторы прогресса'
 
-    user_id = models.ForeignKey(User, primary_key=True, on_delete=models.CASCADE, verbose='Идентификатор пользователя')
-    lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose='Идентификатор урока')
-    time_progress = models.TimeField(verbose='Длительность просмотра')
+    user_id = models.ForeignKey(User, primary_key=True, on_delete=models.CASCADE, verbose_name='Идентификатор пользователя')
+    lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='Идентификатор урока')
+    time_progress = models.TimeField(verbose_name='Длительность просмотра')
     watched = models.BooleanField('Идентификатор пользователя', default=False)
 
