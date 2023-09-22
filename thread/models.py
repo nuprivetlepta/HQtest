@@ -35,7 +35,7 @@ class Lesson(models.Model):
 
     lesson_id = models.BigAutoField(primary_key=True, verbose_name='Идентификатор урока')
     link = models.CharField(max_length=100, verbose_name='Ссылка на видео')
-    length = models.TimeField(verbose_name='Продолжительность видео')
+    length = models.DurationField(verbose_name='Продолжительность видео(в секундах)')
 
 
 class Product(models.Model):
@@ -59,7 +59,8 @@ class ProductCompound(models.Model):
         verbose_name = 'Состав продукта'
         verbose_name_plural = 'Составы продуктов'
 
-    product_id = models.ForeignKey(Product, primary_key=True, on_delete=models.CASCADE, verbose_name='Идентификатор продукта')
+    compund_id = models.BigAutoField(primary_key=True, verbose_name='Единица состава')
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Идентификатор продукта')
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='Идентификатор урока')
 
 
@@ -85,7 +86,7 @@ class UserProgress(models.Model):
         verbose_name_plural = 'Индикаторы прогресса'
 
     user_id = models.ForeignKey(User, primary_key=True, on_delete=models.CASCADE, verbose_name='Идентификатор пользователя')
-    lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='Идентификатор урока')
-    time_progress = models.TimeField(verbose_name='Длительность просмотра')
+    lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='Идентификатор урока(ввод в секундах)')
+    time_progress = models.DurationField(verbose_name='Длительность просмотра')
     watched = models.BooleanField('Идентификатор пользователя', default=False)
 
